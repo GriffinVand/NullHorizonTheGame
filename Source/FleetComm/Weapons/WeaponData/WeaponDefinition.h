@@ -5,6 +5,19 @@
 
 class UWeaponFireModifierData;
 class UWeaponFireBehaviorData;
+class UWeaponFireTypeData;
+class ATestDummy;
+class UWeaponBaseUI;
+
+
+UENUM(BlueprintType)
+enum class EFireState : uint8
+{
+	Idle UMETA(DisplayName = "Idle"),
+	Firing UMETA(DisplayName = "Firing"),
+	StartFire UMETA(DisplayName = "StartFire"),
+	StopFire UMETA(DisplayName = "StopFire"),
+};
 
 UENUM(BlueprintType)
 enum class EFireType : uint8
@@ -17,24 +30,15 @@ enum class EFireType : uint8
 USTRUCT(BlueprintType)
 struct FFireOutput
 {
-	
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EFireType FireType;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EFireState FireState;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector Origin;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector Direction;
+	FRotator Direction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 ProjectileCount;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<APoolableActor> ProjectileClass;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Range;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float BeamDuration;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	AActor* TargetActor = nullptr;
+	ATestDummy* TargetActor = nullptr;
 };
 
 UCLASS(BlueprintType)
@@ -44,11 +48,9 @@ class FLEETCOMM_API UWeaponDefinition : public UDataAsset
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	UWeaponFireBehaviorData* WeaponFireBehaviorDataAsset;
+	UWeaponFireBehaviorData* WeaponFireBehaviorData;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<AActor> ProjectileSubClass;
+	UWeaponFireTypeData* WeaponFireTypeData;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	USkeletalMesh* WeaponMesh;
-	
-	
+	TSubclassOf<UWeaponBaseUI> WeaponUIClass;
 };
