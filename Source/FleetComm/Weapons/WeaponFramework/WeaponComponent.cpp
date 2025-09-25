@@ -14,8 +14,7 @@ UWeaponComponent::UWeaponComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	
-	TargetFinderComp = CreateDefaultSubobject<UTargetFinderComponent>(FName("TargetFinderComp"));
-	TargetFinderComp->SetupAttachment(this);
+	
 }
 
 void UWeaponComponent::BeginPlay()

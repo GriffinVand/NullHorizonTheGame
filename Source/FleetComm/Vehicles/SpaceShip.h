@@ -117,7 +117,7 @@ public:
 	virtual void SecondaryFireStarted(const FInputActionValue& Value);
 	virtual void SecondaryFireEnded(const FInputActionValue& Value);
 
-	/*
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EWeaponSlot ActiveSlot = EWeaponSlot::Primary;
 	
@@ -126,7 +126,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UWeaponComponent* SecondaryWeaponComponent;
-	*/
+	
 	
 	
 #pragma endregion Weapons

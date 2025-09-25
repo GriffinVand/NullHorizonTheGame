@@ -2,6 +2,9 @@
 
 
 #include "SpaceShip.h"
+
+#include <FleetComm/Weapons/WeaponFramework/TargetFinderComponent.h>
+
 #include "EnhancedInputComponent.h"
 #include "ShipMovementManager.h"
 #include "Blueprint/UserWidget.h"
@@ -41,14 +44,18 @@ ASpaceShip::ASpaceShip()
 	SecondaryWeapon->PrimarySkeletalMesh->SetupAttachment(SecondaryWeapon);
 	SecondaryWeapon->BulletSpawnPoint->SetupAttachment(SecondaryWeapon);
 
-	/*
+	
 	PrimaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("PrimaryWeaponComponent"));
 	PrimaryWeaponComponent->SetupAttachment(RootComponent);
 	PrimaryWeaponComponent->BulletSpawnPoint = PrimaryWeapon->BulletSpawnPoint;
 	SecondaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("SecondaryWeaponComponent"));
 	SecondaryWeaponComponent->SetupAttachment(RootComponent);
 	SecondaryWeaponComponent->BulletSpawnPoint = SecondaryWeapon->BulletSpawnPoint;
-	*/
+
+	auto* TargetFinderComp = CreateDefaultSubobject<UTargetFinderComponent>(FName("TargetFinderComp"));
+	PrimaryWeaponComponent->TargetFinderComp = TargetFinderComp;
+	SecondaryWeaponComponent->TargetFinderComp = TargetFinderComp;
+	
 	UE_LOG(LogTemp, Error, TEXT("Construct SpaceShip Spaceship::Spaceship"));
 }
 
