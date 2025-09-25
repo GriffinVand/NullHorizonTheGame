@@ -41,14 +41,15 @@ ASpaceShip::ASpaceShip()
 	SecondaryWeapon->PrimarySkeletalMesh->SetupAttachment(SecondaryWeapon);
 	SecondaryWeapon->BulletSpawnPoint->SetupAttachment(SecondaryWeapon);
 
+	/*
 	PrimaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("PrimaryWeaponComponent"));
 	PrimaryWeaponComponent->SetupAttachment(RootComponent);
 	PrimaryWeaponComponent->BulletSpawnPoint = PrimaryWeapon->BulletSpawnPoint;
-	//SecondaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("SecondaryWeaponComponent"));
-	//SecondaryWeaponComponent->SetupAttachment(RootComponent);
-	//SecondaryWeaponComponent->BulletSpawnPoint = SecondaryWeapon->BulletSpawnPoint;
-
-
+	SecondaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("SecondaryWeaponComponent"));
+	SecondaryWeaponComponent->SetupAttachment(RootComponent);
+	SecondaryWeaponComponent->BulletSpawnPoint = SecondaryWeapon->BulletSpawnPoint;
+	*/
+	UE_LOG(LogTemp, Error, TEXT("Construct SpaceShip Spaceship::Spaceship"));
 }
 
 // Called when the game starts or when spawned
@@ -56,7 +57,7 @@ void ASpaceShip::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (PrimaryWeaponComponent) { PrimaryWeaponComponent->OnActivate(); }
+	//if (PrimaryWeaponComponent) { PrimaryWeaponComponent->OnActivate(); }
 }
 
 // Called every frame
@@ -197,32 +198,37 @@ void ASpaceShip::SecondaryFire(const FInputActionValue& Value)
 
 void ASpaceShip::PrimaryFireStarted(const FInputActionValue& Value)
 {
-	if (PrimaryWeaponComponent)
-	{
-		PrimaryWeaponComponent->FirePressed();
-	}
+	
+	// if (PrimaryWeaponComponent)
+	// {
+	// 	PrimaryWeaponComponent->FirePressed();
+	// }
 }
 void ASpaceShip::PrimaryFireEnded(const FInputActionValue& Value)
 {
-	if (PrimaryWeaponComponent)
-	{
-		PrimaryWeaponComponent->FireReleased();
-	}
+	// if (PrimaryWeaponComponent)
+	// {
+	// 	PrimaryWeaponComponent->FireReleased();
+	// }
 }
 void ASpaceShip::SecondaryFireStarted(const FInputActionValue& Value)
 {
+	/*
 	if (SecondaryWeaponComponent)
 	{
 		SecondaryWeaponComponent->FirePressed();
 	}
+	*/
 }
 
 void ASpaceShip::SecondaryFireEnded(const FInputActionValue& Value)
 {
+	/*
 	if (SecondaryWeaponComponent)
 	{
 		SecondaryWeaponComponent->FireReleased();
 	}
+	*/
 }
 
 

@@ -110,19 +110,23 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UWeapon* PrimaryWeapon;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UWeapon* SecondaryWeapon;
+	UWeapon* SecondaryWeapon; 
 
 	virtual void PrimaryFireStarted(const FInputActionValue& Value);
 	virtual void PrimaryFireEnded(const FInputActionValue& Value);
 	virtual void SecondaryFireStarted(const FInputActionValue& Value);
 	virtual void SecondaryFireEnded(const FInputActionValue& Value);
 
+	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EWeaponSlot ActiveSlot = EWeaponSlot::Primary;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UWeaponComponent* PrimaryWeaponComponent;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UWeaponComponent* SecondaryWeaponComponent;
+	*/
 	
 	
 #pragma endregion Weapons
