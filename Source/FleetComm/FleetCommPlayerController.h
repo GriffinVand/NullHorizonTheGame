@@ -24,27 +24,6 @@ protected:
 	/** Input Mapping Context to be used for player input */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* InputMappingContext;
-
-	/** If true, the optional steering wheel input mapping context will be registered */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	bool bUseSteeringWheelControls = false;
-
-	/** Optional Input Mapping Context to be used for steering wheel input.
-	 *  This is added alongside the default Input Mapping Context and does not block other forms of input.
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(EditCondition="bUseSteeringWheelControls"))
-	UInputMappingContext* SteeringWheelInputMappingContext;
-
-	/** Pointer to the controlled vehicle pawn */
-	TObjectPtr<AFleetCommPawn> VehiclePawn;
-
-	/** Type of the UI to spawn */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
-	TSubclassOf<UFleetCommUI> VehicleUIClass;
-
-	/** Pointer to the UI widget */
-	TObjectPtr<UFleetCommUI> VehicleUI;
-
 	
 
 	// Begin Actor interface

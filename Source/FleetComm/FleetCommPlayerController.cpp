@@ -9,10 +9,6 @@ void AFleetCommPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// // spawn the UI widget and add it to the viewport
-	// VehicleUI = CreateWidget<UFleetCommUI>(this, VehicleUIClass);
-	// check(VehicleUI);
-	// VehicleUI->AddToViewport();
 }
 
 void AFleetCommPlayerController::SetupInputComponent()
@@ -29,11 +25,6 @@ void AFleetCommPlayerController::Tick(float Delta)
 {
 	Super::Tick(Delta);
 
-	// if (IsValid(VehiclePawn) && IsValid(VehicleUI))
-	// {
-	// 	VehicleUI->UpdateSpeed(VehiclePawn->GetChaosVehicleMovement()->GetForwardSpeed());
-	// 	VehicleUI->UpdateGear(VehiclePawn->GetChaosVehicleMovement()->GetCurrentGear());
-	// }
 }
 
 void AFleetCommPlayerController::OnPossess(APawn* InPawn)
@@ -43,6 +34,4 @@ void AFleetCommPlayerController::OnPossess(APawn* InPawn)
 	{
 		ship->PossesShip(this);
 	}
-
-	//VehiclePawn = CastChecked<AFleetCommPawn>(InPawn);
 }
