@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/CapsuleComponent.h"
+#include "FleetComm/Weapons/WeaponFramework/WeaponComponent.h"
 #include "GameFramework/Pawn.h"
 #include "SpaceShip.generated.h"
 
@@ -111,6 +112,19 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UWeapon* SecondaryWeapon;
 
+	virtual void PrimaryFireStarted(const FInputActionValue& Value);
+	virtual void PrimaryFireEnded(const FInputActionValue& Value);
+	virtual void SecondaryFireStarted(const FInputActionValue& Value);
+	virtual void SecondaryFireEnded(const FInputActionValue& Value);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EWeaponSlot ActiveSlot = EWeaponSlot::Primary;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UWeaponComponent* PrimaryWeaponComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UWeaponComponent* SecondaryWeaponComponent;
+	
+	
 #pragma endregion Weapons
 	
 #pragma region Camera

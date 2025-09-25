@@ -40,12 +40,23 @@ ASpaceShip::ASpaceShip()
 	SecondaryWeapon->SetupAttachment(RootComponent);
 	SecondaryWeapon->PrimarySkeletalMesh->SetupAttachment(SecondaryWeapon);
 	SecondaryWeapon->BulletSpawnPoint->SetupAttachment(SecondaryWeapon);
+
+	PrimaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("PrimaryWeaponComponent"));
+	PrimaryWeaponComponent->SetupAttachment(RootComponent);
+	PrimaryWeaponComponent->BulletSpawnPoint = PrimaryWeapon->BulletSpawnPoint;
+	//SecondaryWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("SecondaryWeaponComponent"));
+	//SecondaryWeaponComponent->SetupAttachment(RootComponent);
+	//SecondaryWeaponComponent->BulletSpawnPoint = SecondaryWeapon->BulletSpawnPoint;
+
+
 }
 
 // Called when the game starts or when spawned
 void ASpaceShip::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (PrimaryWeaponComponent) { PrimaryWeaponComponent->OnActivate(); }
 }
 
 // Called every frame
@@ -65,8 +76,10 @@ void ASpaceShip::PossesShip(APlayerController* PlayerController)
 		InputBindings.Add(DecelAction, &EnhancedInputComponent->BindAction(DecelAction, ETriggerEvent::Triggered, ShipMovementManager, &UShipMovementManager::DecelerateByInput));
 		InputBindings.Add(DecelAction, &EnhancedInputComponent->BindAction(ToggleFlightMode, ETriggerEvent::Triggered, ShipMovementManager, &UShipMovementManager::ToggleFlightMode));
 		
-		InputBindings.Add(PrimaryFireAction, &EnhancedInputComponent->BindAction(PrimaryFireAction, ETriggerEvent::Triggered, this, &ASpaceShip::PrimaryFire));
-		InputBindings.Add(SecondaryFireAction, &EnhancedInputComponent->BindAction(SecondaryFireAction, ETriggerEvent::Triggered, this, &ASpaceShip::SecondaryFire));
+		InputBindings.Add(PrimaryFireAction, &EnhancedInputComponent->BindAction(PrimaryFireAction, ETriggerEvent::Started, this, &ASpaceShip::PrimaryFireStarted));
+		InputBindings.Add(PrimaryFireAction, &EnhancedInputComponent->BindAction(PrimaryFireAction, ETriggerEvent::Completed, this, &ASpaceShip::PrimaryFireEnded));
+		InputBindings.Add(SecondaryFireAction, &EnhancedInputComponent->BindAction(SecondaryFireAction, ETriggerEvent::Started, this, &ASpaceShip::SecondaryFireStarted));
+		InputBindings.Add(SecondaryFireAction, &EnhancedInputComponent->BindAction(SecondaryFireAction, ETriggerEvent::Completed, this, &ASpaceShip::SecondaryFireEnded));
 
 		InputBindings.Add(LookAction, &EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASpaceShip::Look));
 		InputBindings.Add(ResetCamAction, &EnhancedInputComponent->BindAction(ResetCamAction, ETriggerEvent::Triggered, this, &ASpaceShip::ResetCam));
@@ -181,3 +194,35 @@ void ASpaceShip::SecondaryFire(const FInputActionValue& Value)
 		
 	}
 }
+
+void ASpaceShip::PrimaryFireStarted(const FInputActionValue& Value)
+{
+	if (PrimaryWeaponComponent)
+	{
+		PrimaryWeaponComponent->FirePressed();
+	}
+}
+void ASpaceShip::PrimaryFireEnded(const FInputActionValue& Value)
+{
+	if (PrimaryWeaponComponent)
+	{
+		PrimaryWeaponComponent->FireReleased();
+	}
+}
+void ASpaceShip::SecondaryFireStarted(const FInputActionValue& Value)
+{
+	if (SecondaryWeaponComponent)
+	{
+		SecondaryWeaponComponent->FirePressed();
+	}
+}
+
+void ASpaceShip::SecondaryFireEnded(const FInputActionValue& Value)
+{
+	if (SecondaryWeaponComponent)
+	{
+		SecondaryWeaponComponent->FireReleased();
+	}
+}
+
+
